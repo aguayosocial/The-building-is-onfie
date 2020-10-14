@@ -1,0 +1,174 @@
+import sys
+import random
+import time
+
+
+print("The building is on fire...")
+print("\n")
+time.sleep(1)
+print("Only a hero will save a family trapped inside, and will get out saved")
+print("\n")
+time.sleep(1)
+username = input("That hero would be: \n>")
+print("Welcome ya " + username)
+time.sleep(2)
+print("Now is time for adventure..., it's the fire countdown\n")
+time.sleep(2)
+print("\n3")
+time.sleep(1)
+print("\n2")
+time.sleep(1)
+print("\n1")
+time.sleep(1)
+print("\nGO!!!")
+time.sleep(1)
+print("In the second floor, behind the door B, you hear voices praying for help")
+time.sleep(3)
+print("\n")
+    
+def start():
+    screaming = input("What do you do?: \n 1. Open the door 2. Running away" "\nChoose one option, please\n>")
+    print("\n>")
+    if screaming == "1":
+        save()
+    elif screaming == "2":
+        run_away()
+    else:
+        help()
+
+def save():
+	print("Good, you're a hero!!!")
+	time.sleep(1)
+	print("Take the poor family with you and...")
+	time.sleep(1)
+	print('...')
+	time.sleep(1)
+	print('...')
+	time.sleep(1)
+	print("Run away!!!")
+	time.sleep(2)
+	print("\n")
+	door()
+
+def run_away():
+	print("OOOOO!!")
+	time.sleep(1)
+	print("You have abandonated a poor family...")
+	time.sleep(1)
+	print('ok, it happens. You can still get out on your own')
+	time.sleep(1)
+	print("Now, don't forget")
+	time.sleep(1)
+	print("Run away!!!")
+	time.sleep(2)
+	print("\n")
+	door()
+
+def help():
+	print("Input the numbre '1' or '2' according to your selection or 'q' to quit the game")
+	start()
+ 
+def door():
+	print("Now you keep running, but the door to get you out this floor is locked.\n")
+	time.sleep(1)
+	print("Remember when Ms. AL ITTIHAD told you the code to open the lock? \n")
+	time.sleep(4)
+	print("You used to do some maths to remember...\n")
+	time.sleep(3)
+	print("If you answer correctly at least one of the following operations, the door will open...\n")
+	time.sleep(4)
+
+
+def calculateAnswer(lhs, rhs, operator):
+	if(operator == "-"):
+		return lhs - rhs
+	if(operator == "+"):
+		return lhs + rhs
+	if(operator == "/"):
+		return lhs / rhs
+	if(operator == "*"):
+		return lhs * rhs
+	raise Exception("Unknown operator")
+
+from random import randint
+def generateQuestion():
+	ops = "/*-+"
+	opIndex = randint(0,len(ops)-1)
+	operator = ops[opIndex]
+	lhs = randint(0,10)
+	rhs = randint(0,10)
+	while(rhs == 0 and operator == "/"):
+		rhs = randint(0,10)
+	return lhs, rhs, operator
+
+start()
+
+
+def Finishing():
+    print("Congrats!! You're out!")
+    time.sleep(3)
+    print("You believed in yourself, " + username + ", and you made it.")
+    sys.exit("Congrats!! You're out!")
+
+def names_game():
+    random_string = ''
+ 
+    for _ in range(50):
+        # Considering only upper and lowercase letters
+        random_integer = random.randint(97, 97 + 26 - 1)
+        flip_bit = random.randint(0,1)
+        random_string += (chr(random_integer))
+
+
+    print(random_string)
+    name2 = input("")
+    name3 = 1
+    for name in range(5):
+        if name2 in random_string:
+            name2 = input("")
+            name3 = len(name2) + name3
+        if name3 == 6:
+            Finishing()
+
+    else:
+        sys.exit("Game over. You lost!")
+
+
+
+WrongAnswer = 0
+for i in range(2):
+    question = generateQuestion()
+    correctAnswer = calculateAnswer(question[0], question[1], question[2])        
+    playerAnswer = input('{0} {2} {1}' .format(question[0], question[1], question[2]))
+    if(str(correctAnswer) == playerAnswer):
+        print("Correct!") 
+        time.sleep(2)
+        print("Nioooookkkkk")
+        time.sleep(2)
+        print("The door is open, Congrats!!!")
+        time.sleep(2)
+        print("You're on the first floor. At your right, the door B is closed, but you know that from that flat you can go out")
+        time.sleep(5)
+        print("Lucky you ya " + username + "!!. Problem is you don't remember the name of the owner.")
+        time.sleep(3)
+        print("It was a, b...")
+        time.sleep(2)
+        print("No way Jose. Make one of your mental games to remember the name and let her open the door...")
+        print("It was Miss... - You have to form the name of the lady in order to call her. \nChoose six letters from below 'after taking one, press enter', and form a name")
+        names_game()
+    else:
+        print("Wrong! Correct Answer is " + str(correctAnswer))
+        time.sleep(2)
+        WrongAnswer = WrongAnswer + 1
+    if WrongAnswer == 2:
+        print("You're done")
+        time.sleep(3)
+        print("The building collapses and everyone is dead!!")
+        time.sleep(3)
+        sys.exit("Game over. You lost!")
+
+
+    
+
+if __name__ == "__main__":
+    start()
